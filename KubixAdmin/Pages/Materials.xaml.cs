@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KubixAdmin.CustomControls;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -34,7 +35,41 @@ namespace KubixAdmin.Pages
             enable = (Style)FindResource("ButtonPrimary");
             disable = (Style)FindResource("ButtonPrimaryDisabled");
 
+            foreach (var matr in context.Materials.Local)
+            {
+                MaterialControl mat = new MaterialControl();
+                mat.MaterialName = matr.Name;
+                mat.MaterialDescription = matr.Description;
+                mat.MaterialUnitMeasurement = matr.UnitMeasurement;
+                mat.MaterialUnitPrice = matr.UnitPrice.ToString() +" euros.";
+                mat.MaterialType = matr.Type;
+                mat.Control_Click += new EventHandler(Control_click);
+                mat.MaterialID = matr.MaterialID;
+                rpsGridMaterials.Children.Add(mat);
+            }
+        }
+        protected void Control_click(object sender, EventArgs e)
+        {
+            MaterialControl mc = (MaterialControl)sender;
+            KubixAdmin.Material tempMaterial = null;
 
+            foreach (KubixAdmin.Material material in context.Materials.Local)
+            {
+                if (material.MaterialID == mc.MaterialID)
+                {
+                    tempMaterial = material;
+                }
+            }
+            if (tempMaterial != null)
+            {
+                Application.Current.MainWindow.Content = new Material(tempMaterial);
+            }
+
+        }
+
+        private void BtnAddMaterials_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Content = new Material(null);
         }
     }
 }

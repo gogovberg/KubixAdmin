@@ -34,7 +34,7 @@
             </Border>
 
             <DockPanel Grid.Row="1" LastChildFill="False" Margin="30" >
-                <Button x:Name="btnAddMaterials" Content="ADD NEW MATERIAL" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Left"  VerticalAlignment="Top" Margin="0,0,10,0"  ></Button>
+                <Button x:Name="btnAddMaterials" Content="ADD NEW MATERIAL" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Left"  VerticalAlignment="Top" Margin="0,0,10,0" Click="BtnAddMaterials_Click"  ></Button>
             </DockPanel>
 
             <Border Grid.Row="2" Margin="20,0">

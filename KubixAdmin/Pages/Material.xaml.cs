@@ -31,6 +31,7 @@ namespace KubixAdmin.Pages
             InitializeComponent();
             enable = (Style)FindResource("ButtonPrimary");
             disable = (Style)FindResource("ButtonPrimaryDisabled");
+            _material = mt;
             if (mt != null)
             {
                 tbxName.Text = mt.Name;
@@ -38,6 +39,7 @@ namespace KubixAdmin.Pages
                 tbxUnitMeasurement.Text = mt.UnitMeasurement;
                 tbxUnitPrice.Text = mt.UnitPrice.ToString();
                 tbxType.Text = mt.Type;
+                btnDeleteCustomer.Style = enable;
             }
             else
             {

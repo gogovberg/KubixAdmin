@@ -3,10 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:KubixAdmin.CustomControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             xmlns:local="clr-namespace:KubixAdmin.CustomControls">
+    <Grid Cursor="Hand">
+        <!-- Rectangle hack to put shadow on Customer panels (in a way that it won't affect text rendering) -->
+        <Rectangle HorizontalAlignment="Stretch" Fill="#fff" RadiusX="4" RadiusY="4">
+            <Rectangle.Effect>
+                <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <!-- Customer panel -->
+        <Border MouseUp="MaterialBorder_MouseUp" MouseDown="MaterialBorder_MouseDown" Style="{StaticResource CustomerPanel}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <DockPanel Grid.Row="0">
+                    <Image x:Name="imgMaterialLogo" Width="30" DockPanel.Dock="Left" VerticalAlignment="Top"></Image>
+                    <TextBlock x:Name="tblMaterialName" Text="Material name" Margin="10,0,0,5" DockPanel.Dock="Left" Foreground="#585858" FontWeight="SemiBold" FontSize="18" TextWrapping="Wrap"></TextBlock>
+                </DockPanel>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="tblMaterialDescription"  Text="Material description bruh yo this is to describe it yall" Grid.Row="0" Margin="40,-2,25,0" FontSize="14" TextWrapping="Wrap" FontWeight="Regular"></TextBlock>
+                    <TextBlock x:Name="tblMaterialType" Text="Material type son" Grid.Row="1" Margin="40,0,25,35" FontSize="14" TextWrapping="Wrap" FontWeight="Regular"></TextBlock>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="tblMaterialUnitPrice" Text="4 dollars"  Grid.Row="0" Style="{StaticResource TextBlockHelperText}" FontWeight="SemiBold"></TextBlock>
+                    <TextBlock x:Name="tblMaterialUnitMeasurement" Text="a liter" Grid.Row="1" Style="{StaticResource TextBlockHelperText}"></TextBlock>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

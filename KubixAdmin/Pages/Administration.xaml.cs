@@ -27,7 +27,7 @@ namespace KubixAdmin.Pages
 
         private void BtnMaterials_Click(object sender, RoutedEventArgs e)
         {
-
+            Application.Current.MainWindow.Content = new Materials();
         }
 
         private void BtnServices_Click(object sender, RoutedEventArgs e)
