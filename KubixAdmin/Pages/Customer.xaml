@@ -1,0 +1,64 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KubixAdmin.Pages"
+      xmlns:customcontrols="clr-namespace:KubixAdmin.CustomControls"
+      xmlns:rg="clr-namespace:SourceChord.ResponsiveGrid;assembly=ResponsiveGrid.Wpf" xmlns:KubixAdmin="clr-namespace:KubixAdmin" x:Class="KubixAdmin.Pages.Customer"
+       >
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <customcontrols:Header x:Name="headerControl" Grid.Row="0"/>
+        <Border MaxWidth="1200" Grid.Row="1" x:Name="gdrContent" Padding="25,35">
+            <ScrollViewer x:Name="ScrollViewer">
+                <rg:ResponsiveGrid>
+                    <Border >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="tblName" Margin="10" Grid.Row="0" Grid.Column="0"  Text="Name: " Style="{StaticResource TextBlockTitle}"/>
+                                <TextBox x:Name="tbxName" Margin="10" Grid.Row="0" Grid.Column="1" Text=""/>
+                                <TextBlock x:Name="tblSurname" Margin="10" Grid.Row="1" Grid.Column="0"  Text="Surname: " Style="{StaticResource TextBlockTitle}"/>
+                                <TextBox x:Name="tbxSurname" Margin="10" Grid.Row="1" Grid.Column="1" Text=""/>
+                                <TextBlock x:Name="tblAddress" Margin="10" Grid.Row="2" Grid.Column="0"  Text="Address: " Style="{StaticResource TextBlockTitle}"/>
+                                <TextBox x:Name="tbxAddress" Margin="10" Grid.Row="2" Grid.Column="1" Text=""/>
+                                <TextBlock x:Name="tblPhoneNumber" Margin="10" Grid.Row="3" Grid.Column="0"  Text="Phone number: " Style="{StaticResource TextBlockTitle}"/>
+                                <TextBox x:Name="tbxPhoneNumber" Margin="10" Grid.Row="3" Grid.Column="1" Text=""/>
+                                <TextBlock x:Name="tblEmail" Margin="10" Grid.Row="4" Grid.Column="0"  Text="Email: " Style="{StaticResource TextBlockTitle}"/>
+                                <TextBox x:Name="tbxEmail" Margin="10" Grid.Row="4" Grid.Column="1" Text=""/>
+                                <TextBlock x:Name="tblCreationDate" Margin="10" Grid.Row="5" Grid.Column="0"  Text="Creation date: " Style="{StaticResource TextBlockTitle}"/>
+                                <TextBlock x:Name="tbxCreationDate" Margin="10" Grid.Row="5" Grid.Column="1" Text=""/>
+                            </Grid>
+                            <DockPanel Grid.Row="1" Margin="10" LastChildFill="False" >
+                                <Button x:Name="btnSave" Content="SAVE" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Left"  VerticalAlignment="Top" Margin="0,0,10,0" Click="btnSave_Click" />
+                                <Button x:Name="btnCancel" Content="CANCEL" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Left"  VerticalAlignment="Top" Margin="0,0,10,0" Click="btnCancel_Click" />
+                                <Button x:Name="btnDeleteCustomer" Content="DELETE CUSTOMER" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Right" VerticalAlignment="Top" Margin="0,0,10,0" Click="btnDeleteCustomer_Click" ></Button>
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                </rg:ResponsiveGrid>
+            </ScrollViewer>
+        </Border>
+
+    </Grid>
+</Page>

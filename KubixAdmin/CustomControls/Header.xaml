@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="KubixAdmin.CustomControls.Header"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KubixAdmin.CustomControls">
+    <Grid>
+        <!-- Header -->
+        <Border Background="#FFD3D4D6" Height="60">
+            <DockPanel LastChildFill="False">
+                <Button x:Name="imgLogoMpWhite" DockPanel.Dock="Left" Margin="20,0,0,0" Style="{StaticResource ButtonStyleAdminIcon}" Width="170" Click="ImgLogoMpWhite_Click"></Button>
+                <!--Click="btnEvents_Click"-->
+
+                <Button x:Name="btnCustomers" Margin="50,0,0,0" DockPanel.Dock="Left" Content="CUSTOMERS" Style="{StaticResource HeaderLink}" Click="btnCustomers_Click"></Button>
+                <!--Click="btnLogout_Click"-->
+                <Button x:Name="btnLogout" DockPanel.Dock="Right" Content="LOG OUT" Margin="20,0,20,0" Style="{StaticResource ButtonPrimaryS}" Click="btnLogout_Click" ></Button>
+                <Label x:Name="LblCurrentCustomer" DockPanel.Dock="Right" Content="" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Foreground="#ffdd00"></Label>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>
