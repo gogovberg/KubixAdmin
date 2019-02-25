@@ -32,7 +32,7 @@ namespace KubixAdmin.Pages
 
         private void BtnServices_Click(object sender, RoutedEventArgs e)
         {
-
+            Application.Current.MainWindow.Content = new Services();
         }
 
         private void BtnOffers_Click_1(object sender, RoutedEventArgs e)

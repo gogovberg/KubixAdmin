@@ -42,6 +42,25 @@
           <Property Name="ExpectedPrice" Type="decimal" Precision="19" Scale="4" />
           <Property Name="ActualPrice" Type="decimal" Precision="19" Scale="4" />
         </EntityType>
+        <EntityType Name="ServiceMaterials">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+            <PropertyRef Name="MaterialID" />
+          </Key>
+          <Property Name="ServiceID" Type="int" Nullable="false" />
+          <Property Name="MaterialID" Type="int" Nullable="false" />
+          <Property Name="MaterialPerUnit" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="WorkPrice" Type="int" Nullable="false" />
+          <Property Name="WorkTime" Type="int" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -56,6 +75,8 @@
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceMaterials" EntityType="Self.ServiceMaterials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -107,6 +128,8 @@
           <EntitySet Name="Customers" EntityType="KubixDBModel.Customer" />
           <EntitySet Name="Projects" EntityType="KubixDBModel.Project" />
           <EntitySet Name="Materials" EntityType="KubixDBModel.Material" />
+          <EntitySet Name="ServiceMaterials" EntityType="KubixDBModel.ServiceMaterial" />
+          <EntitySet Name="Services" EntityType="KubixDBModel.Service" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -155,6 +178,25 @@
           <Property Name="UnitMeasurement" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UnitPrice" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ServiceMaterial">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+            <PropertyRef Name="MaterialID" />
+          </Key>
+          <Property Name="ServiceID" Type="Int32" Nullable="false" />
+          <Property Name="MaterialID" Type="Int32" Nullable="false" />
+          <Property Name="MaterialPerUnit" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WorkPrice" Type="Int32" Nullable="false" />
+          <Property Name="WorkTime" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -209,6 +251,26 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceMaterials">
+            <EntityTypeMapping TypeName="KubixDBModel.ServiceMaterial">
+              <MappingFragment StoreEntitySet="ServiceMaterials">
+                <ScalarProperty Name="MaterialPerUnit" ColumnName="MaterialPerUnit" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="KubixDBModel.Service">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="WorkTime" ColumnName="WorkTime" />
+                <ScalarProperty Name="WorkPrice" ColumnName="WorkPrice" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

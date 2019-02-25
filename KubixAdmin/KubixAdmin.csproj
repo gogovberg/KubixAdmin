@@ -139,6 +139,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Service.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Services.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,10 +251,19 @@
     <Compile Include="Pages\Projects.xaml.cs">
       <DependentUpon>Projects.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Service.xaml.cs">
+      <DependentUpon>Service.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Services.xaml.cs">
       <DependentUpon>Services.xaml</DependentUpon>
     </Compile>
     <Compile Include="Project.cs">
+      <DependentUpon>KubixEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service.cs">
+      <DependentUpon>KubixEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceMaterial.cs">
       <DependentUpon>KubixEF.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
