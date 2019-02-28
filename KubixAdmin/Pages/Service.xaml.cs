@@ -1,5 +1,7 @@
-﻿using System;
+﻿using KubixAdmin.CustomControls;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,18 +47,32 @@ namespace KubixAdmin.Pages
                
                 btnDeleteService.Style = disable;
             }
+            context = new KubixDBEntities();
+            context.Materials.Load();
+
+            Dictionary<int, string> list = new Dictionary<int, string>();
+
+            foreach (var matr in context.Materials.Local)
+            {
+                ServiceMaterialControl smc = new ServiceMaterialControl();
+                lbMaterials.Items.Add(smc);
+            }
         }
 
         private void BtnDeleteService_Click(object sender, RoutedEventArgs e)
         {
-            KubixAdmin.Service newService = context.Services.Find(_service.ServiceID);
-            if (newService != null)
+            if(_service!=null)
             {
-                context.Services.Remove(newService);
-                context.SaveChanges();
+                KubixAdmin.Service newService = context.Services.Find(_service.ServiceID);
+                if (newService != null)
+                {
+                    context.Services.Remove(newService);
+                    context.SaveChanges();
+                }
+
+                Application.Current.MainWindow.Content = new Services();
             }
 
-            Application.Current.MainWindow.Content = new Services();
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)

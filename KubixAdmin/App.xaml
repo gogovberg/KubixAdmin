@@ -12,6 +12,7 @@
                 <ResourceDictionary x:Name="Checkboxes"  Source="pack://application:,,,/KubixAdmin;component/Resources/Checkboxes.xaml" />
                 <ResourceDictionary x:Name="CustomControls"  Source="pack://application:,,,/KubixAdmin;component/Resources/CustomControls.xaml" />
                 <ResourceDictionary x:Name="TextBased"  Source="pack://application:,,,/KubixAdmin;component/Resources/TextBased.xaml" />
+                <ResourceDictionary x:Name="ComboBoxes"  Source="pack://application:,,,/KubixAdmin;component/Resources/ComboBoxes.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 
