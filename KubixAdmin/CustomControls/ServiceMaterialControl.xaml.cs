@@ -20,6 +20,8 @@ namespace KubixAdmin.CustomControls
     /// </summary>
     public partial class ServiceMaterialControl : UserControl
     {
+        public int ServiceID { set; get; }
+        public int MaterialID { set; get; }
         public ServiceMaterialControl()
         {
             InitializeComponent();

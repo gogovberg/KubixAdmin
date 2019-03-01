@@ -4,15 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KubixAdmin.CustomControls" >
-    <Grid>
+    <Grid Margin="10" Width="Auto">
         <Rectangle HorizontalAlignment="Stretch" Fill="#fff" RadiusX="4" RadiusY="4">
             <Rectangle.Effect>
                 <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
             </Rectangle.Effect>
         </Rectangle>
-        <DockPanel LastChildFill="False">
-            <CheckBox x:Name="cbIsMaterialChecked"  Content="temp checkbox"></CheckBox>
-            <TextBox  x:Name="tbMaterialPerUnit" Margin="10,0,0,0" Text="10"></TextBox>
-        </DockPanel>
+        <Border x:Name="bdrServiceMaterial" >
+            <Border.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=cbIsMaterialChecked, Path=IsChecked}" Value="True">
+                            <Setter Property="Border.Background" Value="#FFDD00" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=cbIsMaterialChecked, Path=IsChecked}" Value="False">
+                            <Setter Property="Border.Background" Value="#E5E5E5" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <DockPanel LastChildFill="False">
+                <CheckBox x:Name="cbIsMaterialChecked" Style="{StaticResource ChecBoxDataStyle}" Margin="5" Content="temp checkbox"></CheckBox>
+                <TextBox  x:Name="tbMaterialPerUnit" Margin="5" Text="10"></TextBox>
+                <TextBlock x:Name="tblMaterialUnit"  Margin="5" FontWeight="SemiBold" FontSize="14" Text="m2"></TextBlock>
+            </DockPanel>
+
+        </Border>
     </Grid>
 </UserControl>

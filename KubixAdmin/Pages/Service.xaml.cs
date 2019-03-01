@@ -32,6 +32,7 @@ namespace KubixAdmin.Pages
             enable = (Style)FindResource("ButtonPrimary");
             disable = (Style)FindResource("ButtonPrimaryDisabled");
             _service = service;
+            int serviceId = -1;
             if (service != null)
             {
 
@@ -41,6 +42,7 @@ namespace KubixAdmin.Pages
                 tbxWorkTime.Text = _service.WorkTime.ToString();
 
                 btnDeleteService.Style = enable;
+                serviceId = _service.ServiceID;
             }
             else
             {
@@ -49,13 +51,32 @@ namespace KubixAdmin.Pages
             }
             context = new KubixDBEntities();
             context.Materials.Load();
+            context.Services.Load();
+            context.ServiceMaterials.Load();
+        
 
-            Dictionary<int, string> list = new Dictionary<int, string>();
+             List<ServiceMaterial> listServiceMaterials = (from s in context.Services
+                        join sm in context.ServiceMaterials on s.ServiceID equals sm.ServiceID
+                        where s.ServiceID == serviceId
+                        select sm).ToList();
 
             foreach (var matr in context.Materials.Local)
             {
                 ServiceMaterialControl smc = new ServiceMaterialControl();
-                lbMaterials.Items.Add(smc);
+                foreach (ServiceMaterial sm in listServiceMaterials)
+                {
+                    if (matr.MaterialID == sm.MaterialID)
+                    {
+                        smc.cbIsMaterialChecked.IsChecked = true;
+                        break;
+                    }
+                }
+                
+                smc.MaterialID = matr.MaterialID;
+                smc.ServiceID = serviceId;
+                smc.cbIsMaterialChecked.Content = matr.Name;
+                smc.tblMaterialUnit.Text = matr.UnitMeasurement;
+                icMaterials.Children.Add(smc);
             }
         }
 
@@ -79,7 +100,7 @@ namespace KubixAdmin.Pages
         {
 
             KubixAdmin.Service newService;
-            if(_service!=null)
+            if (_service != null)
             {
                 newService = context.Services.Find(_service.ServiceID);
             }
@@ -90,8 +111,35 @@ namespace KubixAdmin.Pages
             }
             newService.Name = tbxServiceName.Text;
             newService.Description = tbxDescription.Text;
+            if (string.IsNullOrEmpty(tbxWorkPrice.Text))
+            {
+                tbxWorkPrice.Text = "0";
+            }
+            if (string.IsNullOrEmpty(tbxWorkTime.Text))
+            {
+                tbxWorkTime.Text = "0";
+            }
             newService.WorkPrice = int.Parse(tbxWorkPrice.Text);
             newService.WorkTime = int.Parse(tbxWorkTime.Text);
+            context.SaveChanges();
+
+            ServiceMaterial serviceMaterial;
+
+            foreach(ServiceMaterialControl smc in icMaterials.Children)
+            {
+                serviceMaterial = context.ServiceMaterials.Find(smc.ServiceID, smc.MaterialID);
+                if(smc.cbIsMaterialChecked.IsChecked.Value)
+                {
+                    if(serviceMaterial==null)
+                    {
+                        serviceMaterial = new ServiceMaterial();
+                        serviceMaterial.MaterialID = smc.MaterialID;
+                        serviceMaterial.ServiceID = newService.ServiceID;
+                        context.ServiceMaterials.Add(serviceMaterial);
+                    }
+                    serviceMaterial.MaterialPerUnit = int.Parse(smc.tbMaterialPerUnit.Text);
+                }
+            }
             context.SaveChanges();
             Application.Current.MainWindow.Content = new Service(newService);
         }
