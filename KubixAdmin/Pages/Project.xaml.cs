@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using System.Data.Entity;
+using KubixAdmin.CustomControls;
+
 namespace KubixAdmin.Pages
 {
     /// <summary>
@@ -34,14 +37,44 @@ namespace KubixAdmin.Pages
             _customer = customer;
             _project = project;
             btnDeleteProject.Style = disable;
+            int projectId = -1;
             if (project!=null)
             {
+                projectId = project.ProjectID;
                 tbxName.Text = project.Name;
                 tbxAddress.Text = project.Address;
                 tbxExpectedPrice.Text = project.ExpectedPrice.ToString();
                 dtpExpirationDate.SelectedDate = project.ExpirationDate;
                 tbxActualPrice.Text = project.ActualPrice.ToString();
                 btnDeleteProject.Style = enable;
+            }
+
+            context = new KubixDBEntities();
+            context.Projects.Load();
+            context.ProjectServices.Load();
+            context.Services.Load();
+            List<ProjectService> listProjectServices = (from p in context.Projects
+                                                          join ps in context.ProjectServices on p.ProjectID equals ps.ProjectID
+                                                          where p.ProjectID == projectId
+                                                        select ps).ToList();
+
+            foreach (var serv in context.Services.Local)
+            {
+                ServiceMaterialControl smc = new ServiceMaterialControl();
+                foreach (ProjectService ps in listProjectServices)
+                {
+                    if (serv.ServiceID == ps.ServiceID)
+                    {
+                        smc.cbIsMaterialChecked.IsChecked = true;
+                        break;
+                    }
+                }
+
+                smc.MaterialID = serv.ServiceID;
+                smc.ServiceID = projectId;
+                smc.cbIsMaterialChecked.Content = serv.Name;
+                smc.tblMaterialUnit.Text = "m2";
+                icServices.Children.Add(smc);
             }
         }
        

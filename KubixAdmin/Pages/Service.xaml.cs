@@ -32,6 +32,7 @@ namespace KubixAdmin.Pages
             enable = (Style)FindResource("ButtonPrimary");
             disable = (Style)FindResource("ButtonPrimaryDisabled");
             _service = service;
+
             int serviceId = -1;
             if (service != null)
             {

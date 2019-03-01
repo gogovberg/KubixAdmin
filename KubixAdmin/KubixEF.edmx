@@ -42,6 +42,15 @@
           <Property Name="ExpectedPrice" Type="decimal" Precision="19" Scale="4" />
           <Property Name="ActualPrice" Type="decimal" Precision="19" Scale="4" />
         </EntityType>
+        <EntityType Name="ProjectServices">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="ServiceID" Type="int" Nullable="false" />
+          <Property Name="UnitsPerService" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="ServiceMaterials">
           <Key>
             <PropertyRef Name="ServiceID" />
@@ -75,6 +84,7 @@
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectServices" EntityType="Self.ProjectServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceMaterials" EntityType="Self.ServiceMaterials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -130,6 +140,7 @@
           <EntitySet Name="Materials" EntityType="KubixDBModel.Material" />
           <EntitySet Name="ServiceMaterials" EntityType="KubixDBModel.ServiceMaterial" />
           <EntitySet Name="Services" EntityType="KubixDBModel.Service" />
+          <EntitySet Name="ProjectServices" EntityType="KubixDBModel.ProjectService" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -197,6 +208,15 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="WorkPrice" Type="Int32" Nullable="false" />
           <Property Name="WorkTime" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProjectService">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceID" Type="Int32" Nullable="false" />
+          <Property Name="UnitsPerService" Type="Double" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -271,6 +291,15 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectServices">
+            <EntityTypeMapping TypeName="KubixDBModel.ProjectService">
+              <MappingFragment StoreEntitySet="ProjectServices">
+                <ScalarProperty Name="UnitsPerService" ColumnName="UnitsPerService" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

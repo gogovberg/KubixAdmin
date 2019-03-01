@@ -271,6 +271,9 @@
     <Compile Include="Project.cs">
       <DependentUpon>KubixEF.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProjectService.cs">
+      <DependentUpon>KubixEF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Service.cs">
       <DependentUpon>KubixEF.tt</DependentUpon>
     </Compile>

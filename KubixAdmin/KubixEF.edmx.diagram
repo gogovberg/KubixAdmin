@@ -9,8 +9,9 @@
         <EntityTypeShape EntityType="KubixDBModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="KubixDBModel.Project" Width="1.5" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="KubixDBModel.Material" Width="1.5" PointX="0.875" PointY="4.25" />
-        <EntityTypeShape EntityType="KubixDBModel.ServiceMaterial" Width="1.75" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="KubixDBModel.ServiceMaterial" Width="1.75" PointX="2.875" PointY="4.25" />
         <EntityTypeShape EntityType="KubixDBModel.Service" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="KubixDBModel.ProjectService" Width="1.5" PointX="5.375" PointY="4.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
