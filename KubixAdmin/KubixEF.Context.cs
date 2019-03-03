@@ -34,6 +34,7 @@ namespace KubixAdmin
         public virtual DbSet<ServiceMaterial> ServiceMaterials { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<ProjectService> ProjectServices { get; set; }
+        public virtual DbSet<Unit> Units { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

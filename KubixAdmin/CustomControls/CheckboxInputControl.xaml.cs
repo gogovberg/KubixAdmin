@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 namespace KubixAdmin.CustomControls
 {
     /// <summary>
-    /// Interaction logic for ServiceMaterialControl.xaml
+    /// Interaction logic for CheckboxInputControl.xaml
     /// </summary>
-    public partial class ServiceMaterialControl : UserControl
+    public partial class CheckboxInputControl : UserControl
     {
-        public int ServiceID { set; get; }
-        public int MaterialID { set; get; }
-        public ServiceMaterialControl()
+        public int ParentID { set; get; }
+        public int ChildID { set; get; }
+        public CheckboxInputControl()
         {
             InitializeComponent();
         }

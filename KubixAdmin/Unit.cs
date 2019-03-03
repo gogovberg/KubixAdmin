@@ -12,14 +12,10 @@ namespace KubixAdmin
     using System;
     using System.Collections.Generic;
     
-    public partial class Service
+    public partial class Unit
     {
-        public int ServiceID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int WorkPrice { get; set; }
-        public Nullable<int> WorkTime { get; set; }
-        public int UnitID { get; set; }
-        public bool IsIndependetPrice { get; set; }
+        public int UnitUD { get; set; }
+        public string UnitName { get; set; }
+        public string UnitDescription { get; set; }
     }
 }

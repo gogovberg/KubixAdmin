@@ -95,7 +95,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\ServiceMaterialControl.xaml">
+    <Page Include="CustomControls\CheckboxInputControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,8 +202,8 @@
     <Compile Include="CustomControls\ServiceControl.xaml.cs">
       <DependentUpon>ServiceControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\ServiceMaterialControl.xaml.cs">
-      <DependentUpon>ServiceMaterialControl.xaml</DependentUpon>
+    <Compile Include="CustomControls\CheckboxInputControl.xaml.cs">
+      <DependentUpon>CheckboxInputControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\SubHeader.xaml.cs">
       <DependentUpon>SubHeader.xaml</DependentUpon>
@@ -287,6 +287,9 @@
       <DependentUpon>KubixEF.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
+      <DependentUpon>KubixEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Unit.cs">
       <DependentUpon>KubixEF.tt</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">

@@ -32,6 +32,8 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -45,7 +47,10 @@
                                 <TextBox x:Name="tbxWorkPrice" Margin="10" Grid.Row="2" Grid.Column="1" Text=""/>
                                 <TextBlock x:Name="tblWorkTime" Margin="10" Grid.Row="3" Grid.Column="0"  Text="Time for work: " Style="{StaticResource TextBlockTitle}"/>
                                 <TextBox x:Name="tbxWorkTime" Margin="10" Grid.Row="3" Grid.Column="1" Text=""/>
-                                
+                                <TextBlock x:Name="tblMeasurementUnit" Margin="10" Grid.Row="4" Grid.Column="0"  Text="Unit of measurement: " Style="{StaticResource TextBlockTitle}"/>
+                                <ComboBox x:Name="cbxMeasurementUnit" Margin="10" Grid.Row="4" Grid.Column="1" Text=""/>
+                                <TextBlock x:Name="tblPriceIndependent" Margin="10" Grid.Row="5" Grid.Column="0"  Text="Is price independent of materials: " Style="{StaticResource TextBlockTitle}"/>
+                                <CheckBox x:Name="cbIsPriceIndependent" Style="{StaticResource ChecBoxDataStyle}"  VerticalContentAlignment="Center"  Margin="10" Grid.Row="5" Grid.Column="1" />
                             </Grid>
 
                             <Border Grid.Row="1" Background="Transparent" CornerRadius="4" Margin="10">

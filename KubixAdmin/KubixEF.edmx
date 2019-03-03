@@ -69,6 +69,8 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="WorkPrice" Type="int" Nullable="false" />
           <Property Name="WorkTime" Type="int" />
+          <Property Name="UnitID" Type="int" Nullable="false" />
+          <Property Name="IsIndependetPrice" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -80,6 +82,14 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="UnitUD" />
+          </Key>
+          <Property Name="UnitUD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnitName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="UnitDescription" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityContainer Name="KubixDBModelStoreContainer">
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
@@ -88,6 +98,7 @@
           <EntitySet Name="ServiceMaterials" EntityType="Self.ServiceMaterials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -141,6 +152,7 @@
           <EntitySet Name="ServiceMaterials" EntityType="KubixDBModel.ServiceMaterial" />
           <EntitySet Name="Services" EntityType="KubixDBModel.Service" />
           <EntitySet Name="ProjectServices" EntityType="KubixDBModel.ProjectService" />
+          <EntitySet Name="Units" EntityType="KubixDBModel.Unit" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -208,6 +220,8 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="WorkPrice" Type="Int32" Nullable="false" />
           <Property Name="WorkTime" Type="Int32" />
+          <Property Name="UnitID" Type="Int32" Nullable="false" />
+          <Property Name="IsIndependetPrice" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ProjectService">
           <Key>
@@ -217,6 +231,14 @@
           <Property Name="ProjectID" Type="Int32" Nullable="false" />
           <Property Name="ServiceID" Type="Int32" Nullable="false" />
           <Property Name="UnitsPerService" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="UnitUD" />
+          </Key>
+          <Property Name="UnitUD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnitName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UnitDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -286,6 +308,8 @@
           <EntitySetMapping Name="Services">
             <EntityTypeMapping TypeName="KubixDBModel.Service">
               <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="IsIndependetPrice" ColumnName="IsIndependetPrice" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
                 <ScalarProperty Name="WorkTime" ColumnName="WorkTime" />
                 <ScalarProperty Name="WorkPrice" ColumnName="WorkPrice" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -300,6 +324,15 @@
                 <ScalarProperty Name="UnitsPerService" ColumnName="UnitsPerService" />
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="KubixDBModel.Unit">
+              <MappingFragment StoreEntitySet="Units">
+                <ScalarProperty Name="UnitDescription" ColumnName="UnitDescription" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="UnitUD" ColumnName="UnitUD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

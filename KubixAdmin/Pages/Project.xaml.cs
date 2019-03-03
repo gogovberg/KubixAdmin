@@ -60,7 +60,7 @@ namespace KubixAdmin.Pages
 
             foreach (var serv in context.Services.Local)
             {
-                ServiceMaterialControl smc = new ServiceMaterialControl();
+                CheckboxInputControl smc = new CheckboxInputControl();
                 foreach (ProjectService ps in listProjectServices)
                 {
                     if (serv.ServiceID == ps.ServiceID)
@@ -70,8 +70,8 @@ namespace KubixAdmin.Pages
                     }
                 }
 
-                smc.MaterialID = serv.ServiceID;
-                smc.ServiceID = projectId;
+                smc.ChildID = serv.ServiceID;
+                smc.ParentID = projectId;
                 smc.cbIsMaterialChecked.Content = serv.Name;
                 smc.tblMaterialUnit.Text = "m2";
                 icServices.Children.Add(smc);
@@ -104,7 +104,31 @@ namespace KubixAdmin.Pages
             newProject.ExpirationDate = dtpExpirationDate.SelectedDate.Value.Date;
             newProject.ExpectedPrice = decimal.Parse(tbxExpectedPrice.Text);
             newProject.ActualPrice = decimal.Parse(tbxActualPrice.Text);
+
             context.SaveChanges();
+
+
+
+
+            ProjectService projectSerivce;
+            foreach(CheckboxInputControl ps in icServices.Children)
+            {
+                projectSerivce = context.ProjectServices.Find(ps.Parent, ps.ChildID);
+                if(ps.cbIsMaterialChecked.IsChecked.Value)
+                {
+                    if(projectSerivce==null)
+                    {
+                        projectSerivce = new ProjectService();
+                        projectSerivce.ServiceID = ps.ChildID;
+                        projectSerivce.ProjectID = ps.ParentID;
+                        context.ProjectServices.Add(projectSerivce);
+                    }
+                    projectSerivce.UnitsPerService = int.Parse(ps.tbMaterialPerUnit.Text);
+                }
+            }
+            context.SaveChanges();
+
+
             Application.Current.MainWindow.Content = new ProjectDashboard(_customer, newProject);
         }
 

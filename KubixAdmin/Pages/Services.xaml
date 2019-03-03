@@ -37,10 +37,11 @@
             </DockPanel>
 
             <Border Grid.Row="2" Margin="20,0">
-                <ScrollViewer Grid.Row="1" x:Name="ScrollViewer">
+                <ScrollViewer x:Name="ScrollViewer">
                     <rg:ResponsiveGrid x:Name="rpsGridServices" ></rg:ResponsiveGrid>
                 </ScrollViewer>
             </Border>
+        
         </Grid>
     </Grid>
 </Page>

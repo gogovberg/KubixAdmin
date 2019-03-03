@@ -41,7 +41,7 @@
 
             <Border Grid.Row="2" Margin="20,0">
                 <ScrollViewer Grid.Row="1" x:Name="ScrollViewer">
-                    <rg:ResponsiveGrid x:Name="rpsGridProjects" ></rg:ResponsiveGrid>
+                  
                 </ScrollViewer>
             </Border>
         </Grid>

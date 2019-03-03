@@ -33,6 +33,18 @@ namespace KubixAdmin.Pages
             disable = (Style)FindResource("ButtonPrimaryDisabled");
             _service = service;
 
+          
+            context = new KubixDBEntities();
+            context.Materials.Load();
+            context.Services.Load();
+            context.ServiceMaterials.Load();
+            context.Units.Load();
+
+            ComboboxItem cbi;
+           
+           
+
+
             int serviceId = -1;
             if (service != null)
             {
@@ -44,26 +56,38 @@ namespace KubixAdmin.Pages
 
                 btnDeleteService.Style = enable;
                 serviceId = _service.ServiceID;
+              
+                cbIsPriceIndependent.IsChecked = _service.IsIndependetPrice;
             }
             else
             {
-               
                 btnDeleteService.Style = disable;
             }
-            context = new KubixDBEntities();
-            context.Materials.Load();
-            context.Services.Load();
-            context.ServiceMaterials.Load();
-        
+            int selctedIndex = 0;
+            int unitIndex = 0;
+            foreach (Unit unit in context.Units.Local)
+            {
+                cbi = new ComboboxItem();
+                cbi.Text = unit.UnitName;
+                cbi.Value = unit.UnitUD;
+                if(_service.UnitID==unit.UnitUD)
+                {
+                    selctedIndex = unitIndex;
+                }
+                cbxMeasurementUnit.Items.Add(cbi);
+                unitIndex++;
+            }
 
-             List<ServiceMaterial> listServiceMaterials = (from s in context.Services
+            cbxMeasurementUnit.SelectedIndex = selctedIndex;
+
+            List<ServiceMaterial> listServiceMaterials = (from s in context.Services
                         join sm in context.ServiceMaterials on s.ServiceID equals sm.ServiceID
                         where s.ServiceID == serviceId
                         select sm).ToList();
 
             foreach (var matr in context.Materials.Local)
             {
-                ServiceMaterialControl smc = new ServiceMaterialControl();
+                CheckboxInputControl smc = new CheckboxInputControl();
                 foreach (ServiceMaterial sm in listServiceMaterials)
                 {
                     if (matr.MaterialID == sm.MaterialID)
@@ -73,12 +97,14 @@ namespace KubixAdmin.Pages
                     }
                 }
                 
-                smc.MaterialID = matr.MaterialID;
-                smc.ServiceID = serviceId;
+                smc.ChildID = matr.MaterialID;
+                smc.ParentID = serviceId;
                 smc.cbIsMaterialChecked.Content = matr.Name;
                 smc.tblMaterialUnit.Text = matr.UnitMeasurement;
                 icMaterials.Children.Add(smc);
             }
+           
+            
         }
 
         private void BtnDeleteService_Click(object sender, RoutedEventArgs e)
@@ -122,19 +148,24 @@ namespace KubixAdmin.Pages
             }
             newService.WorkPrice = int.Parse(tbxWorkPrice.Text);
             newService.WorkTime = int.Parse(tbxWorkTime.Text);
+
+            ComboboxItem tempItm = (ComboboxItem)cbxMeasurementUnit.SelectedItem;
+            newService.UnitID = (int)tempItm.Value;
+            newService.IsIndependetPrice = cbIsPriceIndependent.IsChecked.Value;
+
             context.SaveChanges();
 
             ServiceMaterial serviceMaterial;
 
-            foreach(ServiceMaterialControl smc in icMaterials.Children)
+            foreach(CheckboxInputControl smc in icMaterials.Children)
             {
-                serviceMaterial = context.ServiceMaterials.Find(smc.ServiceID, smc.MaterialID);
+                serviceMaterial = context.ServiceMaterials.Find(smc.ParentID, smc.ChildID);
                 if(smc.cbIsMaterialChecked.IsChecked.Value)
                 {
                     if(serviceMaterial==null)
                     {
                         serviceMaterial = new ServiceMaterial();
-                        serviceMaterial.MaterialID = smc.MaterialID;
+                        serviceMaterial.MaterialID = smc.ChildID;
                         serviceMaterial.ServiceID = newService.ServiceID;
                         context.ServiceMaterials.Add(serviceMaterial);
                     }

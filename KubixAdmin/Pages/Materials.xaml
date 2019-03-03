@@ -7,7 +7,6 @@
       xmlns:rg="clr-namespace:SourceChord.ResponsiveGrid;assembly=ResponsiveGrid.Wpf"
       xmlns:custom="clr-namespace:KubixAdmin.CustomControls"
       Title="Materials">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,7 +17,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition ></RowDefinition>
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0" Margin="30,30" Background="#FFD3D4D6" CornerRadius="4" Padding="15, 10" HorizontalAlignment="Stretch">
@@ -38,10 +37,11 @@
             </DockPanel>
 
             <Border Grid.Row="2" Margin="20,0">
-                <ScrollViewer Grid.Row="1" x:Name="ScrollViewer">
+                <ScrollViewer x:Name="ScrollViewer">
                     <rg:ResponsiveGrid x:Name="rpsGridMaterials" ></rg:ResponsiveGrid>
                 </ScrollViewer>
             </Border>
+        
         </Grid>
     </Grid>
 </Page>
