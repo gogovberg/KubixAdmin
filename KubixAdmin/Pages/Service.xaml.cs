@@ -70,7 +70,7 @@ namespace KubixAdmin.Pages
                 cbi = new ComboboxItem();
                 cbi.Text = unit.UnitName;
                 cbi.Value = unit.UnitUD;
-                if(_service.UnitID==unit.UnitUD)
+                if(_service != null && _service.UnitID==unit.UnitUD)
                 {
                     selctedIndex = unitIndex;
                 }

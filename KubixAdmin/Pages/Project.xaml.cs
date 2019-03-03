@@ -113,7 +113,7 @@ namespace KubixAdmin.Pages
             ProjectService projectSerivce;
             foreach(CheckboxInputControl ps in icServices.Children)
             {
-                projectSerivce = context.ProjectServices.Find(ps.Parent, ps.ChildID);
+                projectSerivce = context.ProjectServices.Find(ps.ParentID, ps.ChildID);
                 if(ps.cbIsMaterialChecked.IsChecked.Value)
                 {
                     if(projectSerivce==null)

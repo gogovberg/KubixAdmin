@@ -35,15 +35,25 @@
                 </Grid>
             </Border>
 
-            <DockPanel Grid.Row="1" LastChildFill="False" Margin="30" >
+            <Grid  Grid.Row="1" Margin="30" >
+                <Rectangle  Fill="#fff" Stretch="Fill" RadiusX="4" RadiusY="4">
+                    <Rectangle.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="315" Color="#ccc"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Border>
+                    <ScrollViewer Grid.Row="1" x:Name="ScrollViewer">
+                        <Grid x:Name="DynamicGrid"></Grid>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+           
+            
+            <DockPanel Grid.Row="2" LastChildFill="False" Margin="30" >
                 <Button x:Name="btnEditProject" Content="EDIT PROJECT" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Right"  VerticalAlignment="Top" Margin="0,0,10,0" Click="btnEditProject_Click"  ></Button>
             </DockPanel>
 
-            <Border Grid.Row="2" Margin="20,0">
-                <ScrollViewer Grid.Row="1" x:Name="ScrollViewer">
-                  
-                </ScrollViewer>
-            </Border>
+          
         </Grid>
     </Grid>
 </Page>
